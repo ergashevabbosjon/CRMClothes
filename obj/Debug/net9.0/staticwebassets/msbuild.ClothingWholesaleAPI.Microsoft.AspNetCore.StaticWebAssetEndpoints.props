@@ -1,0 +1,16 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/ClothingWholesaleAPI/index.html">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-pj1tkwjfMaxYbGZ2F7XEaAyWybzBb79jGMf31QSb7Yc="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"35919"},{"Name":"Content-Type","Value":"text/html"},{"Name":"ETag","Value":"\u0022pj1tkwjfMaxYbGZ2F7XEaAyWybzBb79jGMf31QSb7Yc=\u0022"},{"Name":"Last-Modified","Value":"Sun, 01 Jun 2025 08:42:18 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/ClothingWholesaleAPI/index.i52njocj30.html">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"i52njocj30"},{"Name":"integrity","Value":"sha256-pj1tkwjfMaxYbGZ2F7XEaAyWybzBb79jGMf31QSb7Yc="},{"Name":"label","Value":"_content/ClothingWholesaleAPI/index.html"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"35919"},{"Name":"Content-Type","Value":"text/html"},{"Name":"ETag","Value":"\u0022pj1tkwjfMaxYbGZ2F7XEaAyWybzBb79jGMf31QSb7Yc=\u0022"},{"Name":"Last-Modified","Value":"Sun, 01 Jun 2025 08:42:18 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>

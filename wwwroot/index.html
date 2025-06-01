@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fashion Wholesale CRM</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
+			min-height: 100vh;
+			color: #333;
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+
+		.container {
+			width: 95%;
+			max-width: 1600px;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(10px);
+			border-radius: 20px;
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+			overflow: hidden;
+		}
+
+		.header {
+			background: rgba(255, 255, 255, 0.9);
+			padding: 25px 30px;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+		}
+
+		.header h1 {
+			color: #4a5568;
+			font-size: 2.2rem;
+			margin-bottom: 8px;
+			background: linear-gradient(45deg, #5a78d7, #8a5fcf);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.header p {
+			color: #6c757d;
+			font-size: 1rem;
+		}
+
+		.main-content {
+			display: grid;
+			grid-template-columns: 300px 1fr;
+			gap: 0;
+			min-height: calc(100vh - 150px);
+			/* Adjusted based on actual header height, ensure enough space */
+		}
+
+		.sidebar {
+			background: rgba(255, 255, 255, 0.85);
+			padding: 25px;
+			border-right: 1px solid rgba(0, 0, 0, 0.1);
+			overflow-y: auto;
+			/* In case sidebar content is too long */
+		}
+
+		.content-area {
+			background: rgba(255, 255, 255, 0.95);
+			padding: 25px;
+			overflow-y: auto;
+		}
+
+		.nav-menu {
+			list-style: none;
+			margin-bottom: 25px;
+		}
+
+		.nav-menu li {
+			margin-bottom: 12px;
+		}
+
+		.nav-menu button {
+			width: 100%;
+			padding: 14px 18px;
+			background: linear-gradient(45deg, #667eea, #764ba2);
+			color: white;
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+			font-size: 1rem;
+			font-weight: 500;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.nav-menu button:hover {
+			transform: translateX(5px);
+			box-shadow: 0 6px 22px rgba(102, 126, 234, 0.45);
+		}
+
+		.nav-menu button.active {
+			background: linear-gradient(45deg, #48bb78, #38a169);
+			box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+		}
+
+		.stats-grid {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 15px;
+			margin-bottom: 25px;
+		}
+
+		.stat-card {
+			background: #ffffff;
+			color: #4a5568;
+			padding: 18px;
+			border-radius: 12px;
+			text-align: left;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+			border-left: 5px solid;
+		}
+
+		.stat-card:nth-child(1) {
+			border-color: #667eea;
+		}
+
+		.stat-card:nth-child(2) {
+			border-color: #764ba2;
+		}
+
+		.stat-card:nth-child(3) {
+			border-color: #f5576c;
+		}
+
+		.stat-card:nth-child(4) {
+			border-color: #48bb78;
+		}
+
+		.stat-card h3 {
+			font-size: 1.8rem;
+			margin-bottom: 5px;
+			color: #333;
+		}
+
+		.stat-card p {
+			color: #718096;
+			font-size: 0.9rem;
+		}
+
+		.page-section {
+			display: none;
+			/* Initially hidden */
+		}
+
+		.page-section.active {
+			display: block;
+			/* Shown when active */
+		}
+
+		.page-section h2 {
+			font-size: 1.8rem;
+			color: #4a5568;
+			margin-bottom: 20px;
+			padding-bottom: 10px;
+			border-bottom: 2px solid #e2e8f0;
+		}
+
+		.orders-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+			background: white;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+		}
+
+		.orders-table th,
+		.orders-table td {
+			padding: 14px 18px;
+			text-align: left;
+			border-bottom: 1px solid #e9ecef;
+		}
+
+		.orders-table th {
+			background: linear-gradient(45deg, #667eea, #764ba2);
+			color: white;
+			font-weight: 600;
+			font-size: 0.9rem;
+			text-transform: uppercase;
+		}
+
+		.orders-table tr:last-child td {
+			border-bottom: none;
+		}
+
+		.orders-table tr:hover {
+			background-color: #f8f9fa;
+		}
+
+		.status-badge {
+			padding: 6px 14px;
+			border-radius: 20px;
+			font-size: 0.8rem;
+			font-weight: 600;
+			text-align: center;
+			display: inline-block;
+			min-width: 110px;
+			text-transform: capitalize;
+		}
+
+		.status-yangi {
+			background: #ffe0e0;
+			color: #c53030;
+		}
+
+		.status-tayyorlanmoqda {
+			background: #fff3cd;
+			color: #dd6b20;
+		}
+
+		.status-yuborilgan {
+			background: #d1eaff;
+			color: #3182ce;
+		}
+
+		.status-yetkazib-berilgan {
+			background: #d4edda;
+			color: #38a169;
+		}
+
+		.status-bekor-qilingan {
+			background: #e9ecef;
+			color: #718096;
+		}
+
+		/* Ensure this class is used if status is null/undefined */
+
+		.action-button {
+			background: linear-gradient(45deg, #5e7ddb, #6c429a);
+			color: white;
+			border: none;
+			padding: 9px 18px;
+			border-radius: 8px;
+			cursor: pointer;
+			font-size: 0.85rem;
+			transition: all 0.3s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+		}
+
+		.action-button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.6);
+			backdrop-filter: blur(5px);
+		}
+
+		.modal-content {
+			background-color: white;
+			margin: 12% auto;
+			padding: 35px;
+			border-radius: 15px;
+			width: 90%;
+			max-width: 550px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+			animation: slideDown 0.4s ease-out;
+		}
+
+		@keyframes slideDown {
+			from {
+				transform: translateY(-50px);
+				opacity: 0;
+			}
+
+			to {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+
+		.modal-content h2 {
+			font-size: 1.6rem;
+			color: #4a5568;
+			margin-bottom: 25px;
+		}
+
+		.close {
+			color: #aaa;
+			float: right;
+			font-size: 32px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: color 0.2s ease;
+		}
+
+		.close:hover {
+			color: #333;
+		}
+
+		.form-group {
+			margin-bottom: 22px;
+		}
+
+		.form-group label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: 600;
+			color: #4a5568;
+		}
+
+		.form-group input[type="text"],
+		.form-group select {
+			width: 100%;
+			padding: 14px;
+			border: 1px solid #ced4da;
+			border-radius: 8px;
+			font-size: 1rem;
+			transition: border-color 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.form-group input[readonly] {
+			background-color: #e9ecef;
+			cursor: not-allowed;
+		}
+
+		.form-group select:focus,
+		.form-group input[type="text"]:focus {
+			outline: none;
+			border-color: #667eea;
+			box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+		}
+
+		.chart-container {
+			background: white;
+			border-radius: 12px;
+			padding: 25px;
+			margin-top: 20px;
+			box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+			position: relative;
+		}
+
+		.chart-container h3 {
+			margin-bottom: 25px;
+			color: #4a5568;
+			font-size: 1.3rem;
+			text-align: center;
+		}
+
+		.chart-container canvas {
+			max-height: 350px;
+			width: 100% !important;
+		}
+
+		/* Ensure canvas takes width */
+
+		.charts-row {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 20px;
+			margin-bottom: 20px;
+		}
+
+		.loading {
+			text-align: center;
+			padding: 50px;
+			color: #718096;
+			font-size: 1.1rem;
+		}
+
+		.loading::before {
+			display: block;
+			font-size: 2rem;
+			margin-bottom: 10px;
+		}
+
+		.message-area {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			z-index: 2000;
+			width: auto;
+			min-width: 300px;
+			max-width: 400px;
+		}
+
+		.message {
+			padding: 15px 20px;
+			border-radius: 8px;
+			margin-bottom: 10px;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+			opacity: 0;
+			transform: translateX(100%);
+			animation: slideInMessage 0.5s forwards;
+			word-wrap: break-word;
+		}
+
+		@keyframes slideInMessage {
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		.message.success {
+			background: #d4edda;
+			color: #155724;
+			border-left: 5px solid #28a745;
+		}
+
+		.message.error {
+			background: #f8d7da;
+			color: #721c24;
+			border-left: 5px solid #dc3545;
+		}
+
+		.refresh-btn {
+			background: linear-gradient(45deg, #48bb78, #38a169);
+			color: white;
+			border: none;
+			padding: 12px 22px;
+			border-radius: 8px;
+			cursor: pointer;
+			font-size: 0.95rem;
+			margin-bottom: 20px;
+			transition: all 0.3s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.refresh-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+		}
+
+		@media (max-width: 992px) {
+			.main-content {
+				grid-template-columns: 1fr;
+			}
+
+			.sidebar {
+				border-right: none;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			}
+
+			.stats-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			.charts-row {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 576px) {
+			.header h1 {
+				font-size: 1.8rem;
+			}
+
+			.header p {
+				font-size: 0.9rem;
+			}
+
+			.nav-menu button {
+				padding: 12px 15px;
+				font-size: 0.9rem;
+			}
+
+			.stats-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.orders-table {
+				font-size: 0.8rem;
+			}
+
+			.orders-table th,
+			.orders-table td {
+				padding: 10px 12px;
+			}
+
+			.action-button {
+				padding: 7px 14px;
+				font-size: 0.8rem;
+			}
+
+			.modal-content {
+				margin: 5% auto;
+				padding: 20px;
+			}
+
+			.chart-container canvas {
+				max-height: 250px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>🏭 Fashion Wholesale CRM</h1>
+			<p>Tayyor kiyim-kechak mahsulotlari ulgurji yetkazib berish tizimi</p>
+		</div>
+
+		<div class="main-content">
+			<div class="sidebar">
+				<ul class="nav-menu">
+					<li><button onclick="showPage('dashboard')" class="active" id="dashboard-btn">📊 Bosh sahifa</button></li>
+					<li><button onclick="showPage('orders')" id="orders-btn">📦 Buyurtmalar</button></li>
+					<li><button onclick="showPage('analytics')" id="analytics-btn">📈 Tahlil</button></li>
+				</ul>
+				<div class="stats-grid">
+					<div class="stat-card">
+						<h3 id="total-orders">0</h3>
+						<p>Jami buyurtmalar</p>
+					</div>
+					<div class="stat-card">
+						<h3 id="total-revenue">$0</h3>
+						<p>Jami daromad</p>
+					</div>
+					<div class="stat-card">
+						<h3 id="pending-orders">0</h3>
+						<p>Kutilayotgan</p>
+					</div>
+					<div class="stat-card">
+						<h3 id="delivered-orders">0</h3>
+						<p>Yetkazilgan</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="content-area">
+				<div id="message-area"></div>
+				<button class="refresh-btn" onclick="loadOrders()">🔄 Ma'lumotlarni yangilash</button>
+
+				<div id="dashboard" class="page-section active">
+					<h2>Boshqaruv paneli</h2>
+					<div id="dashboard-content" class="loading">Ma'lumotlar yuklanmoqda...</div>
+				</div>
+				<div id="orders" class="page-section">
+					<h2>Buyurtmalarni boshqarish</h2>
+					<div id="orders-content" class="loading">Ma'lumotlar yuklanmoqda...</div>
+				</div>
+				<div id="analytics" class="page-section">
+					<h2>Tahlil va hisobotlar</h2>
+					<div id="analytics-content" class="loading">Ma'lumotlar yuklanmoqda...</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="edit-modal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<h2>Buyurtma holatini o'zgartirish</h2>
+			<form id="edit-form">
+				<input type="hidden" id="edit-order-id">
+				<div class="form-group">
+					<label for="customer-name-modal">Mijoz nomi:</label> <input type="text" id="customer-name-modal" readonly>
+				</div>
+				<div class="form-group">
+					<label for="order-status-modal">Holat:</label> <select id="order-status-modal" required>
+						<option value="Yangi">Yangi</option>
+						<option value="Tayyorlanmoqda">Tayyorlanmoqda</option>
+						<option value="Yuborilgan">Yuborilgan</option>
+						<option value="Yetkazib berilgan">Yetkazib berilgan</option>
+						<option value="Bekor qilingan">Bekor qilingan</option>
+					</select>
+				</div>
+				<button type="submit" class="action-button" style="width: 100%; padding: 14px; font-size: 1rem;">💾
+					Saqlash</button>
+			</form>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+	<script>
+		console.log("CRM Script Loaded") // Skript yuklanganini tekshirish
+
+		let orders = []
+		let currentEditingId = null
+		const API_BASE = 'https://localhost:7124/api' // O'zingizning API manzilingizga moslang!
+		let charts = {}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			console.log("DOM Loaded. Initializing CRM...")
+			loadOrders()
+			setupModal()
+			showPage('dashboard')
+		})
+
+		async function loadOrders() {
+			console.log("loadOrders: Attempting to load orders...")
+			setLoadingState(true, ['dashboard-content', 'orders-content', 'analytics-content'])
+			try {
+				const response = await fetch(`${API_BASE}/Orders`)
+				console.log("loadOrders: Fetch response status:", response.status)
+				if (!response.ok) {
+					let errorMsg = `API server bilan bog'lanishda xatolik (${response.status}).`
+					try {
+						const errorData = await response.json()
+						if (errorData && (errorData.message || errorData.title)) {
+							errorMsg += ` Server xabari: ${errorData.message || errorData.title}`
+						}
+					} catch (e) { console.warn("loadOrders: Could not parse error JSON from server.", e) }
+					throw new Error(errorMsg)
+				}
+				const data = await response.json()
+				console.log("loadOrders: Data received from API:", data)
+
+				if (!Array.isArray(data)) {
+					console.warn("loadOrders: API data is not an array. Using sample data. Received:", data)
+					orders = getSampleData()
+				} else {
+					orders = data
+				}
+				processOrdersData()
+				showMessage('Ma\'lumotlar muvaffaqiyatli yangilandi!', 'success')
+			} catch (error) {
+				console.error('loadOrders: Error loading orders:', error)
+				showMessage(`Xatolik: ${error.message}. Demo ma'lumotlar ishlatilmoqda.`, 'error')
+				orders = getSampleData()
+				processOrdersData()
+			} finally {
+				console.log("loadOrders: Finished loading. Setting loading state to false.")
+				setLoadingState(false, ['dashboard-content', 'orders-content', 'analytics-content'])
+			}
+		}
+
+		function setLoadingState(isLoading, contentIds = []) {
+			console.log(`setLoadingState: isLoading = ${isLoading}`)
+			contentIds.forEach(id => {
+				const element = document.getElementById(id)
+				if (element) {
+					if (isLoading) {
+						element.innerHTML = '<div class="loading">Ma\'lumotlar yuklanmoqda...</div>'
+						element.classList.add('loading-active') // Kontentni yashirish uchun qo'shimcha klass
+					} else {
+						// Kontentni render funksiyalari o'zi tozalaydi va yangi kontent qo'yadi.
+						// Agar loading divi kontent ichida bo'lsa, u renderda yo'qoladi.
+						// Agar render funksiyasi kontentni o'rnatmasa, loading divi qolib ketmasligi uchun:
+						if (element.classList.contains('loading-active')) {
+							// Agar render funksiyasi kontent o'rnatgan bo'lsa, loading divi o'zi yo'qolgan bo'ladi.
+							// Agar render funksiyasi bo'sh qoldirsa, loading divi qolishi mumkin.
+							// Eng yaxshisi, render funksiyalari har doim kontentni o'rnatsin (hatto "ma'lumot yo'q" xabari bilan).
+							const loadingDiv = element.querySelector('.loading')
+							if (loadingDiv && (element.innerHTML === loadingDiv.outerHTML || element.children.length === 1 && element.firstChild === loadingDiv)) {
+								// Agar faqat loading divi bo'lsa va yangi kontent yo'q bo'lsa, tozalash kerak emas,
+								// render funksiyasi "ma'lumot yo'q" deb yozishi kerak.
+							}
+						}
+						element.classList.remove('loading-active')
+					}
+				} else {
+					console.warn(`setLoadingState: Element with ID '${id}' not found.`)
+				}
+			})
+		}
+
+
+		function processOrdersData() {
+			console.log("processOrdersData: Processing orders:", orders)
+			if (!Array.isArray(orders)) {
+				console.error("processOrdersData: orders is not an array! Defaulting to empty array.")
+				orders = []
+			}
+			updateStats()
+			renderDashboard()
+			renderOrders()
+			// Analytics sahifasi aktiv bo'lsa, chartlarni render qilish.
+			// showPage funksiyasi buni o'zi boshqaradi.
+			// Agar kerak bo'lsa, renderAnalytics() ni shu yerda chaqirish mumkin,
+			// lekin u faqat analytics sahifasi ko'rsatilganda kerak.
+			// Lekin ma'lumotlar yangilanganda chartlar ham yangilanishi uchun:
+			if (document.getElementById('analytics').classList.contains('active')) {
+				renderAnalytics()
+			}
+		}
+
+		function getSampleData() {
+			console.log("getSampleData: Providing sample data.")
+			return [
+				{ "id": 1, "customerName": "Toshkent Moda", "status": "Yetkazib berilgan", "orderDate": "2025-04-10T14:30:00", "deliveryDate": "2025-04-18T10:15:00", "totalAmount": 5750, "currency": "USD", "contactPhone": "+998901234567", "trackingNumber": "WH568421" },
+				{ "id": 2, "customerName": "Dubai Imports LLC", "status": "Yuborilgan", "orderDate": "2025-04-25T09:45:00", "deliveryDate": "2025-05-20T00:00:00", "totalAmount": 9800, "currency": "USD", "contactPhone": "+97150123456", "trackingNumber": "WH782145" },
+				{ "id": 3, "customerName": "Samarkand Tekstil", "status": "Tayyorlanmoqda", "orderDate": "2025-05-01T11:20:00", "deliveryDate": null, "totalAmount": 2300, "currency": "USD", "contactPhone": "+998912345678", "trackingNumber": "WH309756" },
+			]
+		}
+
+		function updateStats() {
+			console.log("updateStats: Updating sidebar statistics.")
+			const totalOrders = orders.length
+			const totalRevenue = orders.reduce((sum, order) => sum + (parseFloat(order.totalAmount) || 0), 0)
+			const pendingOrders = orders.filter(o => typeof o.status === 'string' && (o.status.toLowerCase() === 'yangi' || o.status.toLowerCase() === 'tayyorlanmoqda')).length
+			const deliveredOrders = orders.filter(o => typeof o.status === 'string' && o.status.toLowerCase() === 'yetkazib berilgan').length
+
+			document.getElementById('total-orders').textContent = totalOrders
+			document.getElementById('total-revenue').textContent = `$${totalRevenue.toLocaleString()}`
+			document.getElementById('pending-orders').textContent = pendingOrders
+			document.getElementById('delivered-orders').textContent = deliveredOrders
+		}
+
+		function showPage(pageId) {
+			console.log(`showPage: Showing page '${pageId}'`)
+			document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'))
+			document.querySelectorAll('.nav-menu button').forEach(btn => btn.classList.remove('active'))
+
+			const pageElement = document.getElementById(pageId)
+			const buttonElement = document.getElementById(pageId + '-btn')
+
+			if (pageElement) pageElement.classList.add('active')
+			else console.error(`showPage: Page element with ID '${pageId}' not found.`)
+
+			if (buttonElement) buttonElement.classList.add('active')
+			else console.error(`showPage: Button element with ID '${pageId + '-btn'}' not found.`)
+
+			if (pageId === 'analytics' && orders && orders.length > 0) {
+				console.log("showPage: Analytics page selected, rendering analytics.")
+				renderAnalytics()
+			}
+		}
+
+		function renderDashboard() {
+			console.log("renderDashboard: Rendering dashboard content...")
+			const dashboardContent = document.getElementById('dashboard-content')
+			if (!dashboardContent) { console.error("renderDashboard: dashboard-content element not found!"); return }
+
+			if (!orders || orders.length === 0) {
+				dashboardContent.innerHTML = "<p>Hozircha buyurtmalar mavjud emas.</p>"
+				return
+			}
+			const recentOrders = [...orders].sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).slice(0, 5)
+			let html = `<div class="chart-container"><h3>So'nggi buyurtmalar</h3><table class="orders-table"><thead><tr><th>ID</th><th>Mijoz</th><th>Holat</th><th>Summa</th><th>Sana</th></tr></thead><tbody>`
+			recentOrders.forEach(order => {
+				html += `<tr>
+                    <td>#${order.id}</td>
+                    <td>${order.customerName || 'N/A'}</td>
+                    <td><span class="status-badge ${getStatusClass(order.status)}">${order.status || 'Noma\'lum'}</span></td>
+                    <td>$${(parseFloat(order.totalAmount) || 0).toLocaleString()}</td>
+                    <td>${formatDate(order.orderDate)}</td>
+                </tr>`
+			})
+			html += `</tbody></table></div>`
+			dashboardContent.innerHTML = html
+			console.log("renderDashboard: Dashboard content updated.")
+		}
+
+		function renderOrders() {
+			console.log("renderOrders: Rendering orders table...")
+			const ordersContent = document.getElementById('orders-content')
+			if (!ordersContent) { console.error("renderOrders: orders-content element not found!"); return }
+
+			if (!orders || orders.length === 0) {
+				ordersContent.innerHTML = "<p>Hozircha buyurtmalar mavjud emas.</p>"
+				return
+			}
+			let html = `<table class="orders-table"><thead><tr><th>ID</th><th>Mijoz</th><th>Holat</th><th>Summa</th><th>Buyurtma sanasi</th><th>Yetkazib berish sanasi</th><th>Kuzatuv raqami</th><th>Amallar</th></tr></thead><tbody>`
+			orders.forEach(order => {
+				html += `<tr>
+                    <td>#${order.id}</td>
+                    <td><strong>${order.customerName || 'N/A'}</strong><br><small>${order.contactPhone || 'N/A'}</small></td>
+                    <td><span class="status-badge ${getStatusClass(order.status)}">${order.status || 'Noma\'lum'}</span></td>
+                    <td>$${(parseFloat(order.totalAmount) || 0).toLocaleString()}</td>
+                    <td>${formatDate(order.orderDate)}</td>
+                    <td>${order.deliveryDate ? formatDate(order.deliveryDate) : 'Belgilanmagan'}</td>
+                    <td>${order.trackingNumber || 'N/A'}</td>
+                    <td><button class="action-button" onclick="openEditModal(${order.id})">✏️ Tahrirlash</button></td>
+                </tr>`
+			})
+			html += `</tbody></table>`
+			ordersContent.innerHTML = html
+			console.log("renderOrders: Orders table updated.")
+		}
+
+		function renderAnalytics() {
+			console.log("renderAnalytics: Rendering analytics charts...")
+			const analyticsContent = document.getElementById('analytics-content')
+			if (!analyticsContent) { console.error("renderAnalytics: analytics-content element not found!"); return }
+
+			if (!orders || orders.length === 0) {
+				analyticsContent.innerHTML = "<p>Tahlil uchun ma'lumotlar yetarli emas.</p>"
+				return
+			}
+
+			const statusStats = {}
+			const monthlyStats = {} // Key: "Apr 2025", Value: totalAmount
+			const customerStats = {}
+			const dailyOrders = {}   // Key: "YYYY-MM-DD", Value: count
+
+			orders.forEach(order => {
+				const currentStatus = typeof order.status === 'string' ? order.status : 'Noma\'lum'
+				statusStats[currentStatus] = (statusStats[currentStatus] || 0) + 1
+
+				if (order.orderDate) {
+					const orderDate = new Date(order.orderDate)
+					if (!isNaN(orderDate.getTime())) {
+						const monthYear = `${orderDate.toLocaleString('uz-UZ', { month: 'short' })} ${orderDate.getFullYear()}`
+						monthlyStats[monthYear] = (monthlyStats[monthYear] || 0) + (parseFloat(order.totalAmount) || 0)
+
+						const day = orderDate.toISOString().split('T')[0] // YYYY-MM-DD
+						dailyOrders[day] = (dailyOrders[day] || 0) + 1
+					}
+				}
+				customerStats[order.customerName || 'Noma\'lum Mijoz'] = (customerStats[order.customerName || 'Noma\'lum Mijoz'] || 0) + (parseFloat(order.totalAmount) || 0)
+			})
+
+			const avgOrderValue = orders.length > 0 ? (orders.reduce((sum, o) => sum + (parseFloat(o.totalAmount) || 0), 0) / orders.length) : 0
+			const uniqueCustomers = new Set(orders.map(o => o.customerName || 'Noma\'lum Mijoz')).size
+			const deliveryRate = orders.length > 0 ? (((statusStats['Yetkazib berilgan'] || 0) + (statusStats['yetkazib berilgan'] || 0)) / orders.length * 100) : 0 // Case-insensitive
+			const topCustomerEntry = Object.entries(customerStats).sort(([, a], [, b]) => b - a)[0]
+			const topCustomerValue = topCustomerEntry ? topCustomerEntry[1] : 0
+
+			let html = `
+                <div class="charts-row">
+                    <div class="chart-container"><canvas id="statusPieChart"></canvas><h3>📊 Buyurtmalar holati</h3></div>
+                    <div class="chart-container"><canvas id="monthlyRevenueChart"></canvas><h3>📈 Oylik daromad</h3></div>
+                </div>
+                <div class="charts-row">
+                    <div class="chart-container"><canvas id="customerRevenueChart"></canvas><h3>👥 Top 5 Mijozlar</h3></div>
+                    <div class="chart-container"><canvas id="dailyOrdersChart"></canvas><h3>📅 Kunlik buyurtmalar</h3></div>
+                </div>
+                <div class="chart-container"><h3>🎯 Asosiy ko'rsatkichlar</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 10px;">
+                        <div class="stat-card" style="border-color: #fd7e14;"><h3>$${avgOrderValue.toFixed(0)}</h3><p>O'rtacha buyurtma qiymati</p></div>
+                        <div class="stat-card" style="border-color: #20c997;"><h3>${uniqueCustomers}</h3><p>Noyob mijozlar soni</p></div>
+                        <div class="stat-card" style="border-color: #17a2b8;"><h3>${deliveryRate.toFixed(1)}%</h3><p>Yetkazib berish darajasi</p></div>
+                        <div class="stat-card" style="border-color: #6f42c1;"><h3>$${topCustomerValue.toLocaleString()}</h3><p>Eng ko'p daromadli mijoz</p></div>
+                    </div>
+                </div>`
+			analyticsContent.innerHTML = html
+			console.log("renderAnalytics: Analytics HTML structure updated. Creating charts...")
+
+			setTimeout(() => { // Ensure DOM is updated before creating charts
+				createCharts(statusStats, monthlyStats, customerStats, dailyOrders)
+			}, 100) // Small delay
+		}
+
+		function createCharts(statusStats, monthlyStatsData, customerStatsData, dailyOrdersData) {
+			console.log("createCharts: Attempting to create charts with data:", { statusStats, monthlyStatsData, customerStatsData, dailyOrdersData })
+			Object.values(charts).forEach(chart => { if (chart && typeof chart.destroy === 'function') chart.destroy() })
+			charts = {} // Reset charts object
+
+			const commonOptions = (titleText) => ({
+				responsive: true, maintainAspectRatio: false,
+				plugins: {
+					legend: { position: 'bottom', labels: { padding: 15, usePointStyle: true, font: { size: 11 } } },
+					title: { display: true, text: titleText, font: { size: 14, weight: 'bold' }, padding: { top: 5, bottom: 15 } }
+				},
+			})
+			const pieDoughnutColors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#48bb78', '#ffc107', '#fd7e14', '#dc3545', '#6c757d']
+
+			try {
+				const statusCtx = document.getElementById('statusPieChart')?.getContext('2d')
+				if (statusCtx && Object.keys(statusStats).length > 0) {
+					charts.statusPie = new Chart(statusCtx, {
+						type: 'pie',
+						data: { labels: Object.keys(statusStats), datasets: [{ data: Object.values(statusStats), backgroundColor: pieDoughnutColors, borderWidth: 2, borderColor: '#fff' }] },
+						options: commonOptions('Buyurtmalar holati')
+					})
+					console.log("createCharts: Status Pie Chart created.")
+				} else if (!statusCtx) console.error("createCharts: statusPieChart canvas not found"); else console.warn("createCharts: No data for Status Pie Chart")
+
+
+				const monthlyCtx = document.getElementById('monthlyRevenueChart')?.getContext('2d')
+				if (monthlyCtx && Object.keys(monthlyStatsData).length > 0) {
+					const sortedMonths = Object.entries(monthlyStatsData).sort((a, b) => new Date(`01 ${a[0]}`) - new Date(`01 ${b[0]}`))
+					charts.monthlyRevenue = new Chart(monthlyCtx, {
+						type: 'bar',
+						data: {
+							labels: sortedMonths.map(e => e[0]),
+							datasets: [{ label: 'Daromad ($)', data: sortedMonths.map(e => e[1]), backgroundColor: 'rgba(102, 126, 234, 0.8)', borderColor: 'rgba(102, 126, 234, 1)', borderWidth: 1, borderRadius: 5 }]
+						},
+						options: { ...commonOptions('Oylik daromad'), scales: { y: { beginAtZero: true, ticks: { callback: v => `$${v.toLocaleString()}` } } } }
+					})
+					console.log("createCharts: Monthly Revenue Chart created.")
+				} else if (!monthlyCtx) console.error("createCharts: monthlyRevenueChart canvas not found"); else console.warn("createCharts: No data for Monthly Revenue Chart")
+
+
+				const customerCtx = document.getElementById('customerRevenueChart')?.getContext('2d')
+				if (customerCtx && Object.keys(customerStatsData).length > 0) {
+					const sortedCustomers = Object.entries(customerStatsData).sort(([, a], [, b]) => b - a).slice(0, 5)
+					charts.customerRevenue = new Chart(customerCtx, {
+						type: 'doughnut',
+						data: { labels: sortedCustomers.map(([name]) => name), datasets: [{ data: sortedCustomers.map(([, rev]) => rev), backgroundColor: pieDoughnutColors, borderWidth: 2, borderColor: '#fff' }] },
+						options: { ...commonOptions('Top 5 Mijozlar (daromad)'), cutout: '60%' }
+					})
+					console.log("createCharts: Customer Revenue Chart created.")
+				} else if (!customerCtx) console.error("createCharts: customerRevenueChart canvas not found"); else console.warn("createCharts: No data for Customer Revenue Chart")
+
+
+				const dailyCtx = document.getElementById('dailyOrdersChart')?.getContext('2d')
+				if (dailyCtx && Object.keys(dailyOrdersData).length > 0) {
+					const sortedDays = Object.entries(dailyOrdersData).sort(([a], [b]) => new Date(a) - new Date(b))
+					charts.dailyOrders = new Chart(dailyCtx, {
+						type: 'line',
+						data: {
+							labels: sortedDays.map(([day]) => formatDate(day).split(' ')[0]),
+							datasets: [{ label: 'Buyurtmalar soni', data: sortedDays.map(([, count]) => count), borderColor: '#48bb78', backgroundColor: 'rgba(72, 187, 120, 0.1)', borderWidth: 2, fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#48bb78' }]
+						},
+						options: { ...commonOptions('Kunlik buyurtmalar dinamikasi'), scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }, plugins: { ...commonOptions('').plugins, legend: { display: false }, title: { ...commonOptions('').plugins.title, text: 'Kunlik buyurtmalar dinamikasi' } } }
+					})
+					console.log("createCharts: Daily Orders Chart created.")
+				} else if (!dailyCtx) console.error("createCharts: dailyOrdersChart canvas not found"); else console.warn("createCharts: No data for Daily Orders Chart")
+
+			} catch (chartError) {
+				console.error("createCharts: Error during chart creation:", chartError)
+				showMessage("Chartlarni chizishda xatolik yuz berdi.", "error")
+			}
+		}
+
+		function getStatusClass(status) {
+			if (typeof status !== 'string' || !status) return 'status-bekor-qilingan' // Default for unknown or null status
+			return 'status-' + status.toLowerCase().replace(/\s+/g, '-').replace(/'/g, '')
+		}
+
+		function formatDate(dateString) {
+			if (!dateString) return 'N/A'
+			try {
+				const date = new Date(dateString)
+				if (isNaN(date.getTime())) return 'Noto\'g\'ri sana'
+				return `${date.toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' })} ${date.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' })}`
+			} catch (e) {
+				console.error("formatDate error:", e, "for dateString:", dateString)
+				return 'Sana xatosi'
+			}
+		}
+
+		const modal = document.getElementById('edit-modal')
+		const editForm = document.getElementById('edit-form')
+
+		function openEditModal(orderId) {
+			console.log(`openEditModal: Opening modal for order ID ${orderId}`)
+			const order = orders.find(o => o.id === orderId)
+			if (!order) { console.error(`openEditModal: Order with ID ${orderId} not found.`); return }
+
+			currentEditingId = orderId
+			document.getElementById('edit-order-id').value = order.id
+			// Modal ichidagi inputlarning IDlarini o'zgartirgan edim, shularni ishlataman:
+			document.getElementById('customer-name-modal').value = order.customerName || ''
+			document.getElementById('order-status-modal').value = order.status || 'Yangi'
+			if (modal) modal.style.display = 'block'; else console.error("openEditModal: Modal element not found")
+		}
+
+		function closeModal() {
+			console.log("closeModal: Closing modal.")
+			if (modal) modal.style.display = 'none'
+		}
+
+		function setupModal() {
+			console.log("setupModal: Setting up modal event listeners.")
+			if (!modal || !editForm) {
+				console.error("setupModal: Modal or Edit Form not found in DOM.")
+				return
+			}
+			window.onclick = function (event) { if (event.target == modal) closeModal() }
+			editForm.onsubmit = async function (e) {
+				e.preventDefault()
+				console.log("setupModal: Edit form submitted.")
+				await updateOrderStatus()
+			}
+		}
+
+		async function updateOrderStatus() {
+			const newStatus = document.getElementById('order-status-modal').value // Modal ichidagi selectdan olinadi
+			console.log(`updateOrderStatus: Attempting to update order ID ${currentEditingId} to status '${newStatus}'`)
+			if (!currentEditingId) { console.warn("updateOrderStatus: currentEditingId is null."); return }
+
+			try {
+				const response = await fetch(`${API_BASE}/Orders/${currentEditingId}`, {
+					method: 'PUT',
+					headers: { 'Content-Type': 'application/json', 'accept': '*/*' },
+					body: JSON.stringify({ status: newStatus })
+				})
+				console.log("updateOrderStatus: PUT response status:", response.status)
+				if (!response.ok) {
+					let errorMsg = `Buyurtma holatini yangilashda xatolik (${response.status}).`
+					try {
+						const errorData = await response.json()
+						if (errorData && (errorData.message || errorData.title || errorData.detail)) {
+							errorMsg += ` Server xabari: ${errorData.message || errorData.title || errorData.detail}`
+						}
+					} catch (e) { console.warn("updateOrderStatus: Could not parse error JSON from server.", e) }
+					throw new Error(errorMsg)
+				}
+
+				const orderIndex = orders.findIndex(o => o.id === currentEditingId)
+				if (orderIndex !== -1) {
+					orders[orderIndex].status = newStatus
+					console.log(`updateOrderStatus: Local order data updated for ID ${currentEditingId}.`)
+				} else {
+					console.warn(`updateOrderStatus: Order ID ${currentEditingId} not found in local 'orders' array after update.`)
+				}
+
+				processOrdersData()
+				closeModal()
+				showMessage('Buyurtma holati muvaffaqiyatli yangilandi!', 'success')
+			} catch (error) {
+				console.error('updateOrderStatus: Error updating order:', error)
+				showMessage(`Xatolik: ${error.message}`, 'error')
+			}
+		}
+
+		function showMessage(message, type) {
+			console.log(`showMessage: type='${type}', message='${message}'`)
+			const messageArea = document.getElementById('message-area')
+			if (!messageArea) { console.error("showMessage: message-area element not found!"); return }
+
+			const messageDiv = document.createElement('div')
+			messageDiv.className = `message ${type}`
+			messageDiv.textContent = message
+			messageArea.appendChild(messageDiv)
+
+			setTimeout(() => {
+				messageDiv.style.opacity = '0'
+				messageDiv.style.transform = 'translateX(100%)'
+				setTimeout(() => messageDiv.remove(), 500)
+			}, 4500)
+		}
+	</script>
+</body>
+
+</html>
