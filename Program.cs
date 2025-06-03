@@ -52,6 +52,7 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRMClothes API v1");
     c.RoutePrefix = "swagger"; // bu https://crmclothes.onrender.com/swagger bo'lishi uchun kerak
 });
+// Test o'zgartirish
 
 
 app.UseHttpsRedirection();
