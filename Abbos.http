@@ -1,0 +1,6 @@
+@Abbos_HostAddress = http://localhost:5150
+
+GET {{Abbos_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,125 @@
+{
+  "Version": 1,
+  "Hash": "U8SymNs8BXgeA+IIhQ9FbsxNh3AWSynIWwUN8KSIJxE=",
+  "Source": "Abbos",
+  "BasePath": "_content/Abbos",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Abbos\\wwwroot",
+      "Source": "Abbos",
+      "ContentRoot": "C:\\Users\\Lenovo\\Desktop\\Zakaz1\\Abbos\\wwwroot\\",
+      "BasePath": "_content/Abbos",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Lenovo\\Desktop\\Zakaz1\\Abbos\\wwwroot\\index.html",
+      "SourceId": "Abbos",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Lenovo\\Desktop\\Zakaz1\\Abbos\\wwwroot\\",
+      "BasePath": "_content/Abbos",
+      "RelativePath": "index#[.{fingerprint}]?.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "3q0ya2ro74",
+      "Integrity": "1YWeb07d3kOaETIw+fG4A7xgHPMXfyTEX2UOoEazJyI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "index.3q0ya2ro74.html",
+      "AssetFile": "C:\\Users\\Lenovo\\Desktop\\Zakaz1\\Abbos\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "86293"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1YWeb07d3kOaETIw+fG4A7xgHPMXfyTEX2UOoEazJyI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 02:08:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3q0ya2ro74"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1YWeb07d3kOaETIw+fG4A7xgHPMXfyTEX2UOoEazJyI="
+        }
+      ]
+    },
+    {
+      "Route": "index.html",
+      "AssetFile": "C:\\Users\\Lenovo\\Desktop\\Zakaz1\\Abbos\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "86293"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1YWeb07d3kOaETIw+fG4A7xgHPMXfyTEX2UOoEazJyI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 02:08:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1YWeb07d3kOaETIw+fG4A7xgHPMXfyTEX2UOoEazJyI="
+        }
+      ]
+    }
+  ]
+}

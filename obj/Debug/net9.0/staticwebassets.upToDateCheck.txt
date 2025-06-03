@@ -1,2 +1,0 @@
-C:\Users\Lenovo\Desktop\ClothingWholesaleAPI\ClothingWholesaleAPI\wwwroot\index.html
-wwwroot\index.html
