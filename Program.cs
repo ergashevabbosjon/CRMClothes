@@ -46,28 +46,13 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    // Development paytida DbInitializer ni ishga tushirishimiz mumkin
-    // using (var scope = app.Services.CreateScope())
-    // {
-    //     var services = scope.ServiceProvider;
-    //     try
-    //     {
-    //         var context = services.GetRequiredService<ApplicationDbContext>();
-    //         // Agar baza mavjud bo'lmasa yaratadi va migratsiyalarni qo'llaydi
-    //         context.Database.Migrate(); 
-    //         // DbInitializer.Initialize(context); // Keyingi qadamda yaratamiz
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         var logger = services.GetRequiredService<ILogger<Program>>();
-    //         logger.LogError(ex, "An error occurred while migrating or initializing the database.");
-    //     }
-    // }
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRMClothes API v1");
+    c.RoutePrefix = "swagger"; // bu https://crmclothes.onrender.com/swagger bo'lishi uchun kerak
+});
+
 
 app.UseHttpsRedirection();
 
